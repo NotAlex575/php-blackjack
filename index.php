@@ -39,7 +39,7 @@
                         include_once "./scripts/setupGame.php";
                         include_once "./scripts/game.php";
                         include_once "./scripts/moneySystem.php";
-                        if($_SESSION['soldi'] > 0 && $_SESSION["player"] <= 21){
+                        if($_SESSION['soldi'] > 0){
                         echo
                         '
                             <div class="mt-5 col-12 d-flex flex-column justify-content-center align-items-center">
@@ -53,26 +53,35 @@
                             </div>
                         ';
                         }
+                        if($_SESSION["player"] > 21 && $_SESSION['soldi'] > 0){
+                        echo'
+                           <div class="container my-5">
+                                <div class="row">
+                                    <div class="col-12 d-flex flex-column align-items-center">
+                                        <h3>Hai sballato...</h3>
+                                        <form method="post" class="mt-3">
+                                            <button type="submit" name="newGame" class="btn btn-warning">Nuovo game</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        ';
+                        }
                         elseif($_SESSION['soldi'] <= 0){
                         echo'
-                            <div class="my-5 d-flex justify-content-center">
-                                <h3>Hai perso tutti i soldi...</h3>
-                                <form method="post">
-                                    <button type="submit" name="restart">Ricomincia</button>
-                                </form>
+                            <div class="container my-5">
+                                <div class="row">
+                                    <div class="col-12 d-flex flex-column align-items-center">
+                                        <h3 class="mb-3">Hai perso tutti i soldi...</h3>
+                                        <form method="post">
+                                            <button type="submit" name="restart" class="btn btn-warning">Ricomincia</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         ';
                         }
-                        elseif($_SESSION["player"] > 21){
-                            echo'
-                            <div class="my-5 d-flex justify-content-center">
-                                <h3>Hai sballato...</h3>
-                                <form method="post">
-                                    <button type="submit" name="newGame">Nuovo game</button>
-                                </form>
-                            </div>
-                        ';
-                        }
+                       
                         ?>
                 </div>
             </div>
@@ -80,21 +89,21 @@
 
         <!--PULSANTI PER AVVIARE GIOCO O FARE LE CALL-->
         <?php
-        if($_SESSION['soldi'] > 0){
+        if($_SESSION['soldi'] > 0 && $_SESSION["player"] <= 21){
             echo 
             '
                 <div class="container mt-4">
-                    <div class="row">
-                        <div class="border border-success">
-                            <form method="post">
-                                <button type="submit" name="incrementa">Increase</button>
-                                <button type="submit" name="decrementa">Decrease</button>
-                                <button type="submit" name="reset">Reset value</button>
-                                <div class="d-flex justify-content-around align-items-center">
-                                    <button type="submit" name="call">Call</button>
-                                </div>
-                            </form>
-                            <div class="mb-5 d-flex justify-content-end align-items-center">
+                <div class="row">
+                    <div class="border border-success d-flex flex-column justify-content-between" style="height: 150px; padding: 1rem;">
+
+                        <form method="post" class="mt-2">
+                            <div class="d-flex justify-content-around">
+                                <button type="submit" name="call">Call</button>
+                                <button type="submit" name="double">Double</button>
+                            </div>
+                        </form>
+
+                    <div class="d-flex justify-content-end">
                             <p>Soldi attuali: '.$soldi.'</p>
                             </div>
                         </div>
@@ -108,7 +117,7 @@
                 <div class="container mt-4">
                     <div class="row">
                         <div class="border border-success">
-                            <div class="mb-5 d-flex justify-content-end align-items-center">
+                            <div class="d-flex justify-content-end">
                                 <p>Soldi attuali: '.$soldi.'</p>
                             </div>
                         </div>
