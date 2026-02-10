@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if(isset($_POST["newGame"])){
+        unset($_SESSION["player"]);
+        unset($_SESSION["npc"]);
+    }
     if(isset($_POST["restart"])){
         $_SESSION['soldi'] = 1000;
         unset($_SESSION["player"]);
@@ -15,7 +19,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Blackjack575</title>
 </head>
-<body>
+<body class="bg-dark text-white">
     <?php 
         include_once "./layouts/header.php";
     ?>
@@ -23,11 +27,19 @@
         <!--CONTENUTO GIOCO-->
         <div class="container">
             <div class="row">
-                <div class="border">
+                <div class="container text-center my-5 border border-success">
+                    <h1 class="display-4 fw-bold p-4 bg-dark text-white rounded shadow">
+                        BLACKJACK575! <br>
+                        <small class="fs-5 text-warning">OGNI GAME COSTA 500 MONETE!</small>
+                    </h1>
+                </div>
+
+                <div class="border border-success">
                      <?php
                         include_once "./scripts/setupGame.php";
+                        include_once "./scripts/game.php";
                         include_once "./scripts/moneySystem.php";
-                        if($_SESSION['soldi'] > 0){
+                        if($_SESSION['soldi'] > 0 && $_SESSION["player"] <= 21){
                         echo
                         '
                             <div class="mt-5 col-12 d-flex flex-column justify-content-center align-items-center">
@@ -41,12 +53,22 @@
                             </div>
                         ';
                         }
-                        else{
+                        elseif($_SESSION['soldi'] <= 0){
                         echo'
                             <div class="my-5 d-flex justify-content-center">
                                 <h3>Hai perso tutti i soldi...</h3>
                                 <form method="post">
                                     <button type="submit" name="restart">Ricomincia</button>
+                                </form>
+                            </div>
+                        ';
+                        }
+                        elseif($_SESSION["player"] > 21){
+                            echo'
+                            <div class="my-5 d-flex justify-content-center">
+                                <h3>Hai sballato...</h3>
+                                <form method="post">
+                                    <button type="submit" name="newGame">Nuovo game</button>
                                 </form>
                             </div>
                         ';
@@ -63,7 +85,7 @@
             '
                 <div class="container mt-4">
                     <div class="row">
-                        <div class="border">
+                        <div class="border border-success">
                             <form method="post">
                                 <button type="submit" name="incrementa">Increase</button>
                                 <button type="submit" name="decrementa">Decrease</button>
@@ -74,6 +96,20 @@
                             </form>
                             <div class="mb-5 d-flex justify-content-end align-items-center">
                             <p>Soldi attuali: '.$soldi.'</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ';
+         }
+         else if($_SESSION['player'] > 21){
+             echo 
+            '
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="border border-success">
+                            <div class="mb-5 d-flex justify-content-end align-items-center">
+                                <p>Soldi attuali: '.$soldi.'</p>
                             </div>
                         </div>
                     </div>
