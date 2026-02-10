@@ -1,3 +1,12 @@
+<?php 
+ $buttonStart = true;
+
+ if(isset($_POST['start'])){
+    $buttonStart = false;
+ }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +24,22 @@
         <div class="container">
             <div class="row">
                 <div class="border">
-                    <div class="mt-5 d-flex justify-content-center align-items-center">NPC</div>
-                    <div class="my-5"></div>
-                    <div class="mb-5 d-flex justify-content-center align-items-center">PLAYER</div>
+                     <?php
+                            if ($buttonStart){
+                                echo '<div class="d-flex justify-content-center align-items-center">
+                                <form method="post">
+                                    <button type="submit" name="start" class="btn btn-light">Start Game!</button>
+                                </form>
+                                </div>';
+                            }
+                            else{
+                                echo '
+                                <div class="mt-5 d-flex justify-content-center align-items-center">NPC</div>
+                                <div class="my-5"></div>
+                                <div class="mb-5 d-flex justify-content-center align-items-center">PLAYER</div>
+                                ';
+                            }
+                        ?>
                 </div>
             </div>
         </div>
