@@ -11,6 +11,7 @@
         include_once "./layouts/header.php";
     ?>
     <main>
+        <!--CONTENUTO GIOCO-->
         <div class="container">
             <div class="row">
                 <div class="border">
@@ -18,9 +19,15 @@
                 </div>
             </div>
         </div>
+
+        <!--PULSANTI PER AVVIARE GIOCO O FARE LE CALL-->
+        <div class="container mt-4">
+            <div class="row">
+                <div class="border">
+                    <h2 class="text-center">Pulsanti</h2>
+                </div>
+            </div>
+        </div>
     </main>
-    <?php
-        include_once "./layouts/footer.php";
-    ?>
 </body>
 </html>
