@@ -1,8 +1,10 @@
 <?php 
  $buttonStart = true;
+ $firstgame = true;
 
  if(isset($_POST['start'])){
     $buttonStart = false;
+    unset($_POST['start']);
  }
 
 ?>
@@ -33,10 +35,12 @@
                                 </div>';
                             }
                             else{
+                                include_once "./scripts/game.php";
                                 echo '
                                 <div class="mt-5 d-flex justify-content-center align-items-center">NPC</div>
                                 <div class="my-5"></div>
                                 <div class="mb-5 d-flex justify-content-center align-items-center">PLAYER</div>
+                                <div class="mb-5 d-flex justify-content-end align-items-center">'.$soldi.'</div>
                                 ';
                             }
                         ?>
