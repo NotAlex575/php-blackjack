@@ -2,6 +2,8 @@
     session_start();
     if(isset($_POST["restart"])){
         $_SESSION['soldi'] = 1000;
+        unset($_SESSION["player"]);
+        unset($_SESSION["npc"]);
     }
 ?>
 
@@ -23,16 +25,24 @@
             <div class="row">
                 <div class="border">
                      <?php
-                        include_once "./scripts/game.php";
+                        include_once "./scripts/setupGame.php";
+                        include_once "./scripts/moneySystem.php";
                         if($_SESSION['soldi'] > 0){
                         echo
                         '
-                            <div class="mt-5 d-flex justify-content-center align-items-center">NPC</div>
+                            <div class="mt-5 d-flex justify-content-center align-items-center">
+                                <h2>NPC</h2>
+                                <p>'.$_SESSION["npc"].'</p>
+                            </div>
                             <div class="my-5"></div>
-                            <div class="mb-5 d-flex justify-content-center align-items-center">PLAYER</div>
+                            <div class="mb-5 d-flex justify-content-center align-items-center">
+                                <h2>PLAYER</h2>
+                                <p>'.$_SESSION["player"].'</p>
+                            </div>
                             <form method="post">
                                 <button type="submit" name="incrementa">Increase</button>
                                 <button type="submit" name="decrementa">Decrease</button>
+                                <button type="submit" name="reset">Reset value</button>
                             </form>
                             <div class="mb-5 d-flex justify-content-end align-items-center">'.$soldi.'</div>
                         ';
