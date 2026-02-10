@@ -43,6 +43,9 @@
                                 <button type="submit" name="incrementa">Increase</button>
                                 <button type="submit" name="decrementa">Decrease</button>
                                 <button type="submit" name="reset">Reset value</button>
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <button type="submit" name="call">Call</button>
+                                </div>
                             </form>
                             <div class="mb-5 d-flex justify-content-end align-items-center">'.$soldi.'</div>
                         ';

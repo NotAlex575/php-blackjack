@@ -11,4 +11,7 @@
         $_SESSION["player"] = rand(1, 10) + rand(1, 10); 
     }
 
+    if(isset($_POST["call"])){
+        $_SESSION["player"] += rand(1, 10);
+    }
 ?>

@@ -14,6 +14,10 @@ if(isset($_POST["decrementa"])){
     $_SESSION['soldi'] -= 500;
 }
 
+if($_SESSION["player"] > 21){
+    $_SESSION['soldi'] -= 500;
+}
+
 $soldi = $_SESSION['soldi'];
 
 ?>
