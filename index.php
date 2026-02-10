@@ -15,7 +15,9 @@
         <div class="container">
             <div class="row">
                 <div class="border">
-                    <h2 class="text-center">Blackjack575</h2>
+                    <div class="mt-5 d-flex justify-content-center align-items-center">NPC</div>
+                    <div class="my-5"></div>
+                    <div class="mb-5 d-flex justify-content-center align-items-center">PLAYER</div>
                 </div>
             </div>
         </div>
