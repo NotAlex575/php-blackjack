@@ -1,12 +1,8 @@
-<?php 
- $buttonStart = true;
- $firstgame = true;
-
- if(isset($_POST['start'])){
-    $buttonStart = false;
-    unset($_POST['start']);
- }
-
+<?php
+    session_start();
+    if(isset($_POST["restart"])){
+        $_SESSION['soldi'] = 1000;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -27,22 +23,30 @@
             <div class="row">
                 <div class="border">
                      <?php
-                            if ($buttonStart){
-                                echo '<div class="d-flex justify-content-center align-items-center">
+                        include_once "./scripts/game.php";
+                        if($_SESSION['soldi'] > 0){
+                        echo
+                        '
+                            <div class="mt-5 d-flex justify-content-center align-items-center">NPC</div>
+                            <div class="my-5"></div>
+                            <div class="mb-5 d-flex justify-content-center align-items-center">PLAYER</div>
+                            <form method="post">
+                                <button type="submit" name="incrementa">Increase</button>
+                                <button type="submit" name="decrementa">Decrease</button>
+                            </form>
+                            <div class="mb-5 d-flex justify-content-end align-items-center">'.$soldi.'</div>
+                        ';
+                        }
+                        else{
+                        echo'
+                            <div class="my-5 d-flex justify-content-center">
+                                <h3>Hai perso tutti i soldi...</h3>
                                 <form method="post">
-                                    <button type="submit" name="start" class="btn btn-light">Start Game!</button>
+                                    <button type="submit" name="restart">Ricomincia</button>
                                 </form>
-                                </div>';
-                            }
-                            else{
-                                include_once "./scripts/game.php";
-                                echo '
-                                <div class="mt-5 d-flex justify-content-center align-items-center">NPC</div>
-                                <div class="my-5"></div>
-                                <div class="mb-5 d-flex justify-content-center align-items-center">PLAYER</div>
-                                <div class="mb-5 d-flex justify-content-end align-items-center">'.$soldi.'</div>
-                                ';
-                            }
+                            </div>
+                        ';
+                        }
                         ?>
                 </div>
             </div>
