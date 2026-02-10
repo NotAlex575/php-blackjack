@@ -30,24 +30,15 @@
                         if($_SESSION['soldi'] > 0){
                         echo
                         '
-                            <div class="mt-5 d-flex justify-content-center align-items-center">
+                            <div class="mt-5 col-12 d-flex flex-column justify-content-center align-items-center">
                                 <h2>NPC</h2>
                                 <p>'.$_SESSION["npc"].'</p>
                             </div>
                             <div class="my-5"></div>
-                            <div class="mb-5 d-flex justify-content-center align-items-center">
+                            <div class="my-5 col-12 d-flex flex-column justify-content-center align-items-center">
+                                 <p>'.$_SESSION["player"].'</p>
                                 <h2>PLAYER</h2>
-                                <p>'.$_SESSION["player"].'</p>
                             </div>
-                            <form method="post">
-                                <button type="submit" name="incrementa">Increase</button>
-                                <button type="submit" name="decrementa">Decrease</button>
-                                <button type="submit" name="reset">Reset value</button>
-                                <div class="d-flex justify-content-around align-items-center">
-                                    <button type="submit" name="call">Call</button>
-                                </div>
-                            </form>
-                            <div class="mb-5 d-flex justify-content-end align-items-center">'.$soldi.'</div>
                         ';
                         }
                         else{
@@ -66,13 +57,30 @@
         </div>
 
         <!--PULSANTI PER AVVIARE GIOCO O FARE LE CALL-->
-        <div class="container mt-4">
-            <div class="row">
-                <div class="border">
-                    <h2 class="text-center">Pulsanti</h2>
+        <?php
+        if($_SESSION['soldi'] > 0){
+            echo 
+            '
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="border">
+                            <form method="post">
+                                <button type="submit" name="incrementa">Increase</button>
+                                <button type="submit" name="decrementa">Decrease</button>
+                                <button type="submit" name="reset">Reset value</button>
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <button type="submit" name="call">Call</button>
+                                </div>
+                            </form>
+                            <div class="mb-5 d-flex justify-content-end align-items-center">
+                            <p>Soldi attuali: '.$soldi.'</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            ';
+         }
+         ?>
     </main>
 </body>
 </html>
