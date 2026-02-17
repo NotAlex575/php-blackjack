@@ -10,7 +10,7 @@
 
     if($_SESSION["game_end"] && !$_SESSION["pagato"]){
 
-        if($_SESSION["player"] > 21 || $_SESSION["npc"] > $_SESSION["player"]){
+        if(($_SESSION["player"] > 21 || $_SESSION["npc"] > $_SESSION["player"]) && $_SESSION["npc"] <= 21){
             $_SESSION["frase"] = "hai perso...";
             if(isset($_POST["double"])){
                 $_SESSION['soldi'] -= 1000;
