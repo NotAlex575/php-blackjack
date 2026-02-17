@@ -12,12 +12,22 @@
 
         if($_SESSION["player"] > 21 || $_SESSION["npc"] > $_SESSION["player"]){
             $_SESSION["frase"] = "hai perso...";
-            $_SESSION['soldi'] -= 500;
+            if(isset($_POST["double"])){
+                $_SESSION['soldi'] -= 1000;
+            }
+            else{
+                $_SESSION['soldi'] -= 500;
+            }
         }
 
         elseif($_SESSION["npc"] > 21 || $_SESSION["npc"] < $_SESSION["player"]){
             $_SESSION["frase"] = "hai vinto!";
-            $_SESSION['soldi'] += 500;
+            if(isset($_POST["double"])){
+                $_SESSION['soldi'] += 1000;
+            }
+            else{
+                $_SESSION['soldi'] += 500;
+            }
         }
 
         else{
