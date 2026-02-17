@@ -53,12 +53,16 @@
                             </div>
                         ';
                         }
-                        if($_SESSION["player"] > 21 && $_SESSION['soldi'] > 0){
+                        if(($_SESSION["player"] > 21 || 
+                            $_SESSION["npc"] > 21 || 
+                            $_SESSION["npc"] > $_SESSION["player"] || 
+                            $_SESSION["npc"] < $_SESSION["player"]) && 
+                            $_SESSION['soldi'] > 0){
                         echo'
                            <div class="container my-5">
                                 <div class="row">
                                     <div class="col-12 d-flex flex-column align-items-center">
-                                        <h3>Hai sballato...</h3>
+                                        <h3>'.$frase.'</h3>
                                         <form method="post" class="mt-3">
                                             <button type="submit" name="newGame" class="btn btn-warning">Nuovo game</button>
                                         </form>

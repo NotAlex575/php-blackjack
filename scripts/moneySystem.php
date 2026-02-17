@@ -1,23 +1,24 @@
 <?php
 
-// Inizializza soldi se non esiste
-if(!isset($_SESSION['soldi'])){
-    $_SESSION['soldi'] = 1000;
-}
+    // Inizializza soldi se non esiste
+    if(!isset($_SESSION['soldi'])){
+        $_SESSION['soldi'] = 1000;
+    }
 
-// Gestione pulsanti
-if(isset($_POST["incrementa"])){
-    $_SESSION['soldi'] += 500;
-}
+    if($_SESSION["player"] > 21 || $_SESSION["npc"] > $_SESSION["player"]){
+        $frase = "hai perso...";
+        $_SESSION['soldi'] -= 500;
+    }
 
-if(isset($_POST["decrementa"])){
-    $_SESSION['soldi'] -= 500;
-}
+    elseif($_SESSION["npc"] > 21 || $_SESSION["npc"] < $_SESSION["player"]){
+        $frase = "hai vinto!";
+        $_SESSION['soldi'] += 500;
+    }
 
-if($_SESSION["player"] > 21){
-    $_SESSION['soldi'] -= 500;
-}
+    else{
+        $frase = "pareggio!";
+    }
 
-$soldi = $_SESSION['soldi'];
+    $soldi = $_SESSION['soldi'];
 
 ?>
