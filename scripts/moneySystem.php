@@ -1,24 +1,31 @@
 <?php
 
-    // Inizializza soldi se non esiste
     if(!isset($_SESSION['soldi'])){
         $_SESSION['soldi'] = 1000;
     }
 
-    if($_SESSION["player"] > 21 || $_SESSION["npc"] > $_SESSION["player"]){
-        $frase = "hai perso...";
-        $_SESSION['soldi'] -= 500;
+    if(!isset($_SESSION["pagato"]) ){
+        $_SESSION["pagato"] = false;
     }
 
-    elseif($_SESSION["npc"] > 21 || $_SESSION["npc"] < $_SESSION["player"]){
-        $frase = "hai vinto!";
-        $_SESSION['soldi'] += 500;
-    }
+    if($_SESSION["game_end"] && !$_SESSION["pagato"]){
 
-    else{
-        $frase = "pareggio!";
+        if($_SESSION["player"] > 21 || $_SESSION["npc"] > $_SESSION["player"]){
+            $_SESSION["frase"] = "hai perso...";
+            $_SESSION['soldi'] -= 500;
+        }
+
+        elseif($_SESSION["npc"] > 21 || $_SESSION["npc"] < $_SESSION["player"]){
+            $_SESSION["frase"] = "hai vinto!";
+            $_SESSION['soldi'] += 500;
+        }
+
+        else{
+            $_SESSION["frase"] = "pareggio!";
+        }
+
+        $_SESSION["pagato"] = true;
     }
 
     $soldi = $_SESSION['soldi'];
-
 ?>

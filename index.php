@@ -1,14 +1,27 @@
 <?php
     session_start();
+
     if(isset($_POST["newGame"])){
         unset($_SESSION["player"]);
+        $_SESSION["playerTurn"] = true;
         unset($_SESSION["npc"]);
+        unset($_SESSION["pagato"]);
+        $_SESSION["game_end"] = false;
+        $_SESSION["frase"] = "";
     }
     if(isset($_POST["restart"])){
         $_SESSION['soldi'] = 1000;
         unset($_SESSION["player"]);
+        $_SESSION["playerTurn"] = true;
         unset($_SESSION["npc"]);
+        unset($_SESSION["pagato"]);
+        $_SESSION["game_end"] = false;
+        $_SESSION["frase"] = "";
     }
+
+    include_once "./scripts/setupGame.php";
+    include_once "./scripts/game.php";
+    include_once "./scripts/moneySystem.php";
 ?>
 
 <!DOCTYPE html>
@@ -36,10 +49,7 @@
 
                 <div class="border border-success">
                      <?php
-                        include_once "./scripts/setupGame.php";
-                        include_once "./scripts/game.php";
-                        include_once "./scripts/moneySystem.php";
-                        if($_SESSION['soldi'] > 0){
+                        if($_SESSION['soldi'] > 0 && isset($_SESSION["npc"]) && isset($_SESSION["player"])){
                         echo
                         '
                             <div class="mt-5 col-12 d-flex flex-column justify-content-center align-items-center">
@@ -53,16 +63,12 @@
                             </div>
                         ';
                         }
-                        if(($_SESSION["player"] > 21 || 
-                            $_SESSION["npc"] > 21 || 
-                            $_SESSION["npc"] > $_SESSION["player"] || 
-                            $_SESSION["npc"] < $_SESSION["player"]) && 
-                            $_SESSION['soldi'] > 0){
+                        if($_SESSION["game_end"] && $_SESSION['soldi'] > 0){
                         echo'
                            <div class="container my-5">
                                 <div class="row">
                                     <div class="col-12 d-flex flex-column align-items-center">
-                                        <h3>'.$frase.'</h3>
+                                        <h3>'.$_SESSION["frase"].'</h3>
                                         <form method="post" class="mt-3">
                                             <button type="submit" name="newGame" class="btn btn-warning">Nuovo game</button>
                                         </form>
@@ -71,7 +77,7 @@
                             </div>
                         ';
                         }
-                        elseif($_SESSION['soldi'] <= 0){
+                        elseif($_SESSION["game_end"] && $_SESSION['soldi'] <= 0){
                         echo'
                             <div class="container my-5">
                                 <div class="row">
@@ -93,7 +99,7 @@
 
         <!--PULSANTI PER AVVIARE GIOCO O FARE LE CALL-->
         <?php
-        if($_SESSION['soldi'] > 0 && $_SESSION["player"] <= 21){
+        if(!$_SESSION["game_end"]){
             echo 
             '
                 <div class="container mt-4">
@@ -116,7 +122,7 @@
                 </div>
             ';
          }
-         else if($_SESSION['player'] > 21){
+         else{
              echo 
             '
                 <div class="container mt-4">

@@ -3,7 +3,9 @@
         unset($_SESSION["player"]);
         unset($_SESSION["npc"]);
     }
-    $playerTurn = true;
+    if(!isset($_SESSION["playerTurn"])){
+        $_SESSION["playerTurn"] = true;
+    }
     if(!isset($_SESSION["npc"])){
         $_SESSION["npc"] = rand(1, 10) + rand(1, 10);    
     }
