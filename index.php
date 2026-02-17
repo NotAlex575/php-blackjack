@@ -104,6 +104,7 @@
                             <div class="d-flex justify-content-around">
                                 <button type="submit" name="call">Call</button>
                                 <button type="submit" name="double">Double</button>
+                                <button type="submit" name="stop">Stop</button>
                             </div>
                         </form>
 
